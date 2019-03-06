@@ -1,7 +1,9 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: James
- * Date: 06/03/2019
- * Time: 08:43 AM
- */
+@extends('layouts.admin')
+
+
+@section('content')
+
+    <h1>Create Users</h1>
+
+
+@stop
