@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -58,6 +59,7 @@ class AdminUsersController extends Controller
 
             $input = $request->all();
             $input['password'] = bcrypt($request->password);
+
 
         }
 
@@ -130,9 +132,10 @@ class AdminUsersController extends Controller
             $input = $request->all();
             $input['password'] = bcrypt($request->password);
 
+
         }
 
-        $input=$request->all();
+
         if($file=$request->file('photo_id')){
             $name = time().$file->getClientOriginalName();
             $file->move('images',$name);
@@ -157,5 +160,12 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+        User::findOrFail($id)->delete();
+
+        Session::flash('deleted_user','The User has been Deleted');
+
+        return redirect('/admin/users');
+
+
     }
 }
